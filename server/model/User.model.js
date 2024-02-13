@@ -10,14 +10,12 @@ const UserSchema = new Schema(
 
     email: {
       type: String,
-      required: true,
       unique: true,
       required: [true, "Please enter your email."],
     },
 
     mobile: {
       type: Number,
-      required: true,
       unique: true,
       required: [true, "Please enter your mobile number."],
     },
