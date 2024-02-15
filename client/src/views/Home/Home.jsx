@@ -1,12 +1,22 @@
 import React from "react";
-
+import FirstHero from "../../components/HomeHero/FirstHero";
+import SecondHero from "../../components/HomeHero/SecondHero";
+import Subcription from "../../components/Subcription/Subcription";
+import Services from "../../components/Services/Services";
+import Review from "../../components/Review/Review";
+import CounterComponent from "../../components/Counter/CounterComponent";
 function Home() {
   return (
-    <div className="min-h-screen flex justify-center items-center">
-      <h1 className="text-red-600 text-[100px]">
-        Learn <span className="text-green-500">& </span>Implement
-      </h1>
-    </div>
+   <>
+   <div>
+    <FirstHero/>
+    <Services/>
+    <CounterComponent/>
+    <Subcription/>
+    <Review/>
+    
+   </div>
+   </>
   );
 }
 
