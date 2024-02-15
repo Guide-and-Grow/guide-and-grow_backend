@@ -8,7 +8,23 @@ const postApiSignup = async (req, res) => {
   try {
     const { name, email, password } = req.body;
 
-    // console.log(req.body);
+    if (!name || !email || !password) {
+      return res.status(422).json({
+        success: false,
+        message: "Name, email, and password are required.",
+      });
+    }
+
+    // Check if email is already in use
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(409).json({
+        success: false,
+        message:
+          "Email is already in use. Please use a different email address.",
+      });
+    }
+
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const signupObj = new User({
@@ -17,67 +33,20 @@ const postApiSignup = async (req, res) => {
       password: hashedPassword,
     });
 
-    // console.log(signupObj);
-
     const savedUser = await signupObj.save();
 
-    console.log("Saved User", savedUser);
-
-    res.json({
+    res.status(201).json({
       success: true,
       data: savedUser,
-      message: "User saved successfully...",
+      message: "Signup successfully...",
     });
   } catch (err) {
-    res.json({
+    res.status(500).json({
       success: false,
       message: err.message,
     });
   }
 };
-
-// const postApiLogin = async (req, res) => {
-//   const { email, password } = req.body;
-//   try {
-//     if (!email || !password) {
-//       return res.json({
-//         success: false,
-//         message: "Please enter a valid email and password...!",
-//       });
-//     }
-
-//     const findUser = await User.findOne({ email, password }).select(
-//       "name email mobile"
-//     );
-//     if (!findUser) {
-//       return res.json({
-//         success: false,
-//         message: "Invalid Crediantial",
-//       });
-//     }
-
-//     // Create a JWT token
-//     const token = jwt.sign(
-//       { userId: findUser._id },
-//       process.env.JWT_SECRET_KEY,
-//       {
-//         expiresIn: "1h",
-//       }
-//     );
-
-//     res.json({
-//       success: true,
-//       token,
-//       data: findUser,
-//       message: "User login successful...",
-//     });
-//   } catch (err) {
-//     res.json({
-//       success: false,
-//       message: err.message,
-//     });
-//   }
-// }
 
 const postApiLogin = async (req, res) => {
   const { email, password } = req.body;
@@ -106,7 +75,7 @@ const postApiLogin = async (req, res) => {
       success: true,
       id: user._id,
       token: token,
-      message: "User Found",
+      message: "Login successfully...",
     });
   } catch (error) {
     return res.status(400).json({

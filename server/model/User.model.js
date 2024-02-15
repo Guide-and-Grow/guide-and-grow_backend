@@ -7,14 +7,13 @@ const UserSchema = new Schema(
       required: [true, "Please enter your name."],
     },
 
-    // username: {
-    //   type: String,
-    //   unique: true,
-    // },
+    username: {
+      type: String,
+      unique: true,
+    },
 
     email: {
       type: String,
-      unique: true,
       required: [true, "Please enter your email."],
     },
 
@@ -36,31 +35,31 @@ const UserSchema = new Schema(
       required: [true, "Please enter the strong password."],
     },
 
-    // socialMedia: {
-    //   facebook: {
-    //     type: String,
-    //   },
+    socialMedia: {
+      facebook: {
+        type: String,
+      },
 
-    //   twitter: {
-    //     type: String,
-    //   },
+      twitter: {
+        type: String,
+      },
 
-    //   instagram: {
-    //     type: String,
-    //   },
+      instagram: {
+        type: String,
+      },
 
-    //   youtube: {
-    //     type: String,
-    //   },
+      youtube: {
+        type: String,
+      },
 
-    //   linkedin: {
-    //     type: String,
-    //   },
+      linkedin: {
+        type: String,
+      },
 
-    //   github: {
-    //     type: String,
-    //   },
-    // },
+      github: {
+        type: String,
+      },
+    },
   },
 
   { timestamps: true }
