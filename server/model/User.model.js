@@ -2,27 +2,28 @@ import { Schema, model } from "mongoose";
 
 const UserSchema = new Schema(
   {
-    username: {
+    name: {
       type: String,
       required: [true, "Please enter your name."],
+    },
+
+    username: {
+      type: String,
       unique: true,
     },
 
     email: {
       type: String,
-      unique: true,
       required: [true, "Please enter your email."],
     },
 
     mobile: {
       type: Number,
       unique: true,
-      required: [true, "Please enter your mobile number."],
     },
 
     bio: {
       type: String,
-      required: [true, "Please enter your bio."],
     },
 
     avatar: {
@@ -37,32 +38,26 @@ const UserSchema = new Schema(
     socialMedia: {
       facebook: {
         type: String,
-        unique: true,
       },
 
       twitter: {
         type: String,
-        unique: true,
       },
 
       instagram: {
         type: String,
-        unique: true,
       },
 
       youtube: {
         type: String,
-        unique: true,
       },
 
       linkedin: {
         type: String,
-        unique: true,
       },
 
       github: {
         type: String,
-        unique: true,
       },
     },
   },
