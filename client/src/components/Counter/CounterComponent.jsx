@@ -33,37 +33,37 @@ const CounterComponent = () => {
     <div className="container my-5">
      
 
-<section class="text-gray-50 body-font bg-counter">
-  <div class="container px-5 py-24 mx-auto">
-    <div class="flex flex-wrap -m-4 text-center">
-      <div class="p-4 sm:w-1/4 w-1/2">
+<section className="text-gray-50 body-font bg-counter">
+  <div className="container px-5 py-24 mx-auto">
+    <div className="flex flex-wrap -m-4 text-center">
+      <div className="p-4 sm:w-1/4 w-1/2">
       <FontAwesomeIcon icon={faUsers} className='height-200' /><br/>
-        <h2 class="title-font font-medium sm:text-4xl text-3xl text-gray-50">
+        <h2 className="title-font font-medium sm:text-4xl text-3xl text-gray-50">
        
         <Counter from={0} to={1120} time={2000} />
         </h2>
-        <p class="leading-relaxed">Users</p>
+        <p className="leading-relaxed">Users</p>
       </div>
-      <div class="p-4 sm:w-1/4 w-1/2">
+      <div className="p-4 sm:w-1/4 w-1/2">
       <FontAwesomeIcon icon={faUsers} className='height-200' />
-        <h2 class="title-font font-medium sm:text-4xl text-3xl text-gray-50">
+        <h2 className="title-font font-medium sm:text-4xl text-3xl text-gray-50">
         <Counter from={0} to={5000} time={2000} />
         </h2>
-        <p class="leading-relaxed">Subscribes</p>
+        <p className="leading-relaxed">Subscribes</p>
       </div>
-      <div class="p-4 sm:w-1/4 w-1/2">
+      <div className="p-4 sm:w-1/4 w-1/2">
       <FontAwesomeIcon icon={faUsers} className='height-200' />
-        <h2 class="title-font font-medium sm:text-4xl text-3xl text-gray-50">
+        <h2 className="title-font font-medium sm:text-4xl text-3xl text-gray-50">
         <Counter from={0} to={250} time={2000} />
         </h2>
-        <p class="leading-relaxed">Downloads</p>
+        <p className="leading-relaxed">Downloads</p>
       </div>
-      <div class="p-4 sm:w-1/4 w-1/2">
+      <div className="p-4 sm:w-1/4 w-1/2">
       <FontAwesomeIcon icon={faUsers} className='height-200' />
-        <h2 class="title-font font-medium sm:text-4xl text-3xl text-gray-50">
+        <h2 className="title-font font-medium sm:text-4xl text-3xl text-gray-50">
         <Counter from={0} to={500} time={2000} />
         </h2>
-        <p class="leading-relaxed">Products</p>
+        <p className="leading-relaxed">Products</p>
       </div>
     </div>
   </div>
