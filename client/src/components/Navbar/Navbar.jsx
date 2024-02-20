@@ -18,11 +18,12 @@ function Navbar() {
             >
               <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
             </svg>
-            <span className="ml-3 text-xl">Guid & Grow</span>
+            <span className="ml-3 text-xl">Guide & Grow</span>
           </a>
           <nav className="md:ml-auto flex flex-wrap items-center text-base justify-center">
             <a className="mr-5 hover:text-gray-900" href="/">Home</a>
             <a className="mr-5 hover:text-gray-900"href="/about" >About</a>
+            <a className="mr-5 hover:text-gray-900"href="/contact" >Contact</a>
             <a className="mr-5 hover:text-gray-900" href="/developement">Development</a>
             <a className="mr-5 hover:text-gray-900" href="/faq">FAQ</a>
           </nav>
