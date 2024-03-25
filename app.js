@@ -2,8 +2,8 @@ import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import healthCheckRoutes from "./routes/health.route.js";
-import signupCheckRoutes from './routes/user.route.js';
-import loginCheckRoutes from './routes/user.route.js';
+import signupCheckRoutes from "./routes/user.route.js";
+import loginCheckRoutes from "./routes/user.route.js";
 
 const app = express();
 
@@ -14,16 +14,15 @@ app.use(
   })
 );
 
-app.use(express.json());
+app.use(express.json({ limit: "16kb" }));
+app.use(express.urlencoded({ extended: true, limit: "16kb" }));
+app.use(express.static("public"));
 app.use(cookieParser());
 
 export { app };
 
 // routes declaration
 
-app.use('/api', healthCheckRoutes);
-app.use('/api', signupCheckRoutes)
-app.use('/api', loginCheckRoutes)
-
-
-
+app.use("/api", healthCheckRoutes);
+app.use("/api", signupCheckRoutes);
+app.use("/api", loginCheckRoutes);
