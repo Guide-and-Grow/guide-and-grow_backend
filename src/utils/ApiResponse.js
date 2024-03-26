@@ -7,6 +7,7 @@ class ApiResponse {
   }
 }
 
+export { ApiResponse };
 // Define the ApiResponse class to structure HTTP responses consistently across the application. This class encapsulates the details of an HTTP response, including the status code, data payload, message, and success status.
 
 // The constructor takes parameters for statusCode, data, and an optional message, defaulting to "Success". Based on the statusCode, the success property is automatically determined.

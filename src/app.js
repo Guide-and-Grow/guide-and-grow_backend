@@ -2,8 +2,7 @@ import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import healthCheckRoutes from "./routes/health.route.js";
-import signupCheckRoutes from "./routes/user.route.js";
-import loginCheckRoutes from "./routes/user.route.js";
+import userRouter from "./routes/user.route.js";
 
 const app = express();
 
@@ -24,5 +23,5 @@ export { app };
 // routes declaration
 
 app.use("/api", healthCheckRoutes);
-app.use("/api", signupCheckRoutes);
-app.use("/api", loginCheckRoutes);
+
+app.use("/api/v1/users", userRouter);

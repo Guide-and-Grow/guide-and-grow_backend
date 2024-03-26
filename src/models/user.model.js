@@ -39,6 +39,9 @@ const UserSchema = new Schema(
     avatar: {
       type: String, // cloudinary url
     },
+    coverImage: {
+      type: String, // cloudinary url
+    },
 
     password: {
       type: String,
@@ -119,5 +122,4 @@ UserSchema.methods.genrateRefreshToken = function () {
   );
 };
 
-const User = model("User", UserSchema);
-export default User;
+export const User = model("User", UserSchema);
