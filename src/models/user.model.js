@@ -30,6 +30,7 @@ const UserSchema = new Schema(
     mobile: {
       type: Number,
       unique: true,
+      sparse: true
     },
 
     bio: {
