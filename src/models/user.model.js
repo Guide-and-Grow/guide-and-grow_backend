@@ -115,11 +115,11 @@ UserSchema.methods.genrateAccessToken = function () {
   );
 };
 UserSchema.methods.genrateRefreshToken = function () {
-  console.log("genrateRefreshToken-----userid", this.id);
+  console.log("genrateRefreshToken-----userid", this._id);
 
   return jwt.sign(
     {
-      _id: this.id,
+      _id: this._id,
     },
     process.env.REFRESH_TOKEN_SECRET,
     {
