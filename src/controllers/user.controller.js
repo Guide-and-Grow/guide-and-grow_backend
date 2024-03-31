@@ -7,8 +7,10 @@ import { User } from "../models/user.model.js";
 const generateAccessAndRefreshTokens = async (userId) => {
   try {
     const user = await User.findById(userId);
-    const accessToken = user.genrateAccessToken();
-    const refreshToken = user.genrateRefreshToken();
+    const accessToken = await user.genrateAccessToken();
+    const refreshToken = await user.genrateRefreshToken();
+    // console.log("accessToken----->", accessToken);
+    // console.log("refreshToken----->", refreshToken);
     user.refreshToken = refreshToken;
     await user.save({ validateBeforeSave: false });
     return { accessToken, refreshToken };
@@ -101,7 +103,7 @@ const loginUser = asyncHandler(async (req, res) => {
   //access and refresh token
   //send cookie
   const { email, username, password } = req.body;
-  console.log("ssss============?", email, username, password);
+  // console.log("ssss============?", email, username, password);
   if (!(email || username)) {
     throw new ApiError(400, "Email or username field is missing");
   }
@@ -119,6 +121,7 @@ const loginUser = asyncHandler(async (req, res) => {
   const { accessToken, refreshToken } = await generateAccessAndRefreshTokens(
     user._id
   );
+
   const loggedInUser = await User.findById(user._id).select(
     "-password -refreshToken"
   );
@@ -126,6 +129,7 @@ const loginUser = asyncHandler(async (req, res) => {
     httpOnly: true,
     secure: true,
   };
+
   return res
     .status(200)
     .cookie("accessToken", accessToken, option)
