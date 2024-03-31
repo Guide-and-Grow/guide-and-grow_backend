@@ -1,6 +1,8 @@
 import { Schema, model } from "mongoose";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+dotenv.config();
 
 const UserSchema = new Schema(
   {
@@ -30,7 +32,7 @@ const UserSchema = new Schema(
     mobile: {
       type: Number,
       unique: true,
-      sparse: true
+      sparse: true,
     },
 
     bio: {
@@ -98,7 +100,8 @@ UserSchema.methods.isPasswordCorrect = async function (password) {
 };
 
 UserSchema.methods.genrateAccessToken = function () {
-  jwt.sign(
+  console.log("genrateAccessToken");
+  return jwt.sign(
     {
       _id: this._id,
       email: this.email,
@@ -112,9 +115,11 @@ UserSchema.methods.genrateAccessToken = function () {
   );
 };
 UserSchema.methods.genrateRefreshToken = function () {
-  jwt.sign(
+  console.log("genrateRefreshToken-----userid", this.id);
+
+  return jwt.sign(
     {
-      _id: this._id,
+      _id: this.id,
     },
     process.env.REFRESH_TOKEN_SECRET,
     {
