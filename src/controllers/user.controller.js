@@ -259,24 +259,34 @@ const updateUserAvatar = asyncHandler(async (req, res) => {
   if (!avatarLocalPath) {
     throw new ApiError(400, "Avatar file is missing");
   }
+
+  // Upload new avatar image to Cloudinary
   const avatar = await uploadOnCloudinary(avatarLocalPath);
   if (!avatar.url) {
-    throw new ApiError(400, "Error while uploading on avatar");
+    throw new ApiError(400, "Error while uploading avatar");
   }
-  const user = await User.findByIdAndUpdate(
+
+  // Retrieve user's current avatar URL from the database
+  const user = await User.findById(req.user?._id).select("avatar");
+
+  // Delete previous avatar image from Cloudinary if exists
+  if (user.avatar) {
+    const publicId = extractPublicId(user.avatar);
+    await deleteFromCloudinary(publicId);
+  }
+
+  // Update user's avatar URL with the new image URL
+  const updatedUser = await User.findByIdAndUpdate(
     req.user?._id,
-    {
-      $set: {
-        avatar: avatar.url,
-      },
-    },
-    {
-      new: true,
-    }
+    { $set: { avatar: avatar.url } },
+    { new: true }
   ).select("-password");
+
   return res
     .status(200)
-    .json(new ApiResponse(200, user, "Avatar image updated successfully"));
+    .json(
+      new ApiResponse(200, updatedUser, "Avatar image updated successfully")
+    );
 });
 
 const updateUserCoverImage = asyncHandler(async (req, res) => {
@@ -288,7 +298,18 @@ const updateUserCoverImage = asyncHandler(async (req, res) => {
   if (!cover.url) {
     throw new ApiError(400, "Error while uploading on cover image");
   }
-  const user = await User.findByIdAndUpdate(
+
+
+  // Retrieve user's current cover image URL from the database
+  const user = await User.findById(req.user?._id).select("coverImage");
+
+   // Delete previous cover image from Cloudinary if exists
+  if (user && user.coverImage) {
+    const publicId = extractPublicId(user.coverImage);
+    await deleteFromCloudinary(publicId);
+  }
+
+  const updatedUser = await User.findByIdAndUpdate(
     req.user?._id,
     {
       $set: {
@@ -301,7 +322,7 @@ const updateUserCoverImage = asyncHandler(async (req, res) => {
   ).select("-password");
   return res
     .status(200)
-    .json(new ApiResponse(200, user, "Cover image updated successfully"));
+    .json(new ApiResponse(200, updatedUser, "Cover image updated successfully"));
 });
 
 const getUserChannelProfile = asyncHandler(async (req, res) => {
