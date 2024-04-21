@@ -1,4 +1,5 @@
 import { v2 as cloudinary } from "cloudinary";
+import { extractPublicId } from "cloudinary-build-url";
 import fs from "fs";
 import dotenv from "dotenv";
 dotenv.config();
@@ -29,4 +30,16 @@ const uploadOnCloudinary = async (localFilePath) => {
   }
 };
 
-export { uploadOnCloudinary };
+const deleteFromCloudinary = async (url, resource_type = "image") => {
+  const publicId = extractPublicId(url);
+  try {
+    const reponse = await cloudinary.uploader.destroy(publicId, {
+      resource_type: resource_type,
+    });
+    return reponse;
+  } catch (error) {
+    throw new Error("Error deleting image on Cloudinary");
+  }
+};
+
+export { uploadOnCloudinary, deleteFromCloudinary };
