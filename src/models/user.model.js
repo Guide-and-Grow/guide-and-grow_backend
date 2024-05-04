@@ -79,6 +79,12 @@ const UserSchema = new Schema(
         type: String,
       },
     },
+    watchHistory: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Video",
+      },
+    ],
     MyVideo: {
       type: Schema.Types.ObjectId,
       ref: "Video",
